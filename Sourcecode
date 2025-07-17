@@ -1,0 +1,2020 @@
+import tkinter as tk
+from tkcalendar import Calendar
+from tkinter import ttk
+from datetime import datetime
+
+# festivals for each month
+january_days = {
+    (1, 1): {
+        "Festival": "New Year",
+        "Event": "Global Family Day",
+        "National Holiday": True
+    },
+    (2, 1): {
+        "Festival": "None",
+        "Event": "First US air mail service inaugurated (1918)",
+        "National Holiday": False
+    },
+    (3, 1): {
+        "Festival": "None",
+        "Event": "J.R.R. Tolkien's Birthday",
+        "National Holiday": False
+    },
+    (4, 1): {
+        "Festival": "None",
+        "Event": "World Braille Day",
+        "National Holiday": False
+    },
+    (5, 1): {
+        "Festival": "None",
+        "Event": "Discovery of dwarf planet Ceres (1801)",
+        "National Holiday": False
+    },
+    (6, 1): {
+        "Festival": "None",
+        "Event": "First telegraph line completed in USA (1838)",
+        "National Holiday": False
+    },
+    (7, 1): {
+        "Festival": "None",
+        "Event": "Galileo discovers Jupiter’s moons (1610)",
+        "National Holiday": False
+    },
+    (8, 1): {
+        "Festival": "None",
+        "Event": "Stephen Hawking (1942) born",
+        "National Holiday": False
+    },
+    (9, 1): {
+        "Festival": "None",
+        "Event": "Apple’s first iPhone announcement (2007)",
+        "National Holiday": False
+    },
+    (10, 1): {
+        "Festival": "None",
+        "World Day": "World Hindi Day",
+        "Event": "League of Nations founded (1920)",
+        "National Holiday": False
+    },
+    (11, 1): {
+        "Festival": "None",
+        "Event": "First use of insulin to treat diabetes (1922)",
+        "National Holiday": False
+    },
+    (12, 1): {
+        "Festival": "None",
+        "Event": "Swami Vivekananda's Birthday (1863)",
+        "National Holiday": False
+    },
+    (13, 1): {
+        "Festival": "None",
+        "Event": "Murder of Emile Zola (1906)",
+        "National Holiday": False
+    },
+    (14, 1): {
+        "Festival": "Bhogi",
+        "Event": "First demonstration of X-rays (1896)",
+        "National Holiday": True
+    },
+    (15, 1): {
+        "Festival": "Pongal / Makar Sankranti",
+        "Event": "Wikipedia Day",
+        "National Holiday": True
+    },
+    (16, 1): {
+        "Festival": "None",
+        "Event": "First meeting of League of Nations (1920)",
+        "National Holiday": False
+    },
+    (17, 1): {
+        "Festival": "None",
+        "Event": "Birthday of Benjamin Franklin (1706)",
+        "National Holiday": False
+    },
+    (18, 1): {
+        "Festival": "None",
+        "Event": "Thesaurus Day",
+        "National Holiday": False
+    },
+    (19, 1): {
+        "Festival": "None",
+        "Event": "First atomic submarine launched (1955)",
+        "National Holiday": False
+    },
+    (20, 1): {
+        "Festival": "None",
+        "Event": "Barack Obama inaugurated (2009)",
+        "National Holiday": False
+    },
+    (21, 1): {
+        "Festival": "None",
+        "Event": "First Concorde flight (1976)",
+        "National Holiday": False
+    },
+    (22, 1): {
+        "Festival": "None",
+        "Event": "Queen Victoria’s death (1901)",
+        "National Holiday": False
+    },
+    (23, 1): {
+        "Festival": "None",
+        "Event": "Birthday of Subhas Chandra Bose (1897)",
+        "National Holiday": False
+    },
+    (24, 1): {
+        "Festival": "None",
+        "Event": "International Day of Education",
+        "National Holiday": False
+    },
+    (25, 1): {
+        "Festival": "None",
+        "Event": "National Voters Day (India)",
+        "National Holiday": False
+    },
+    (26, 1): {
+        "Festival": "Republic Day (India)",
+        "Event": "India becomes a Republic (1950)",
+        "National Holiday": True
+    },
+    (27, 1): {
+        "Festival": "None",
+        "Event": "International Holocaust Remembrance Day",
+        "National Holiday": False
+    },
+    (28, 1): {
+        "Festival": "None",
+        "Event": "Thaipusam",
+        "National Holiday": False
+    },
+    (29, 1): {
+        "Festival": "None",
+        "Event": "National Puzzle Day",
+        "National Holiday": False
+    },
+    (30, 1): {
+        "Festival": "None",
+        "Event": "Martyrs' Day",
+        "National Holiday": False
+    },
+    (31, 1): {
+        "Festival": "None",
+        "Event": "13th Amendment abolishing slavery passed (1865)",
+        "National Holiday": False
+    }
+}
+february_days = {
+    (1, 2): {
+        "Festival": "None",
+        "Event": "National Freedom Day (US)",
+        "National Holiday": False
+    },
+    (2, 2): {
+        "Festival": "None",
+        "Event": "World Wetlands Day",
+        "National Holiday": False
+    },
+    (3, 2): {
+        "Festival": "None",
+        "Event": "The Day the Music Died (1959)",
+        "National Holiday": False
+    },
+    (4, 2): {
+        "Festival": "None",
+        "Event": "World Cancer Day",
+        "National Holiday": False
+    },
+    (5, 2): {
+        "Festival": "None",
+        "Event": "Western Zodiac New Moon (varies)",
+        "National Holiday": False
+    },
+    (6, 2): {
+        "Festival": "None",
+        "Event": "New Zealand Waitangi Day",
+        "National Holiday": False
+    },
+    (7, 2): {
+        "Festival": "None",
+        "Event": "Charles Dickens' Birthday (1812)",
+        "National Holiday": False
+    },
+    (8, 2): {
+        "Festival": "None",
+        "Event": "Boy Scouts of America founded (1910)",
+        "National Holiday": False
+    },
+    (9, 2): {
+        "Festival": "None",
+        "Event": "National Pizza Day (US)",
+        "National Holiday": False
+    },
+    (10, 2): {
+        "Festival": "None",
+        "Event": "India’s first postage stamp issued (1854)",
+        "National Holiday": False
+    },
+    (11, 2): {
+        "Festival": "None",
+        "Event": "International Day of Women and Girls in Science",
+        "National Holiday": False
+    },
+    (12, 2): {
+        "Festival": "None",
+        "Event": "Darwin Day (Charles Darwin's Birthday, 1809)",
+        "National Holiday": False
+    },
+    (13, 2): {
+        "Festival": "None",
+        "Event": "World Radio Day",
+        "National Holiday": False
+    },
+    (14, 2): {
+        "Festival": "None",
+        "Event":"Valentine's Day",
+        "National Holiday": False
+    },
+    (15, 2): {
+        "Festival": "None",
+        "Event": "Galileo's Birthday (1564)",
+        "National Holiday": False
+    },
+    (16, 2): {
+        "Festival": "None",
+        "Event": "Lithuanian Independence Day",
+        "National Holiday": False
+    },
+    (17, 2): {
+        "Festival": "None",
+        "Event": "Random Acts of Kindness Day",
+        "National Holiday": False
+    },
+    (18, 2): {
+        "Festival": "None",
+        "Event": "Pluto discovered (1930)",
+        "National Holiday": False
+    },
+    (19, 2): {
+        "Festival": "None",
+        "Event": "Shivaji Jayanti (Birth of Chhatrapati Shivaji Maharaj)",
+        "National Holiday": False
+    },
+    (20, 2): {
+        "Festival": "None",
+        "Event": "World Day of Social Justice",
+        "National Holiday": False
+    },
+    (21, 2): {
+        "Festival": "Maha Shivaratri (Varies)",
+        "Event": "International Mother Language Day",
+        "National Holiday": True
+    },
+    (22, 2): {
+        "Festival": "None",
+        "Event": "World Thinking Day",
+        "National Holiday": False
+    },
+    (23, 2): {
+        "Festival": "None",
+        "Event": "US Marines raise flag at Iwo Jima (1945)",
+        "National Holiday": False
+    },
+    (24, 2): {
+        "Festival": "None",
+        "Event": "Steve Jobs' Birthday (1955)",
+        "National Holiday": False
+    },
+    (25, 2): {
+        "Festival": "None",
+        "Event": "First powered flight in India (1911)",
+        "National Holiday": False
+    },
+    (26, 2): {
+        "Festival": "None",
+        "Event": "Levi Strauss born (1829)",
+        "National Holiday": False
+    },
+    (27, 2): {
+        "Festival": "None",
+        "Event": "International Polar Bear Day",
+        "National Holiday": False
+    },
+    (28, 2): {
+        "Festival": "None",
+        "Event": "National Science Day (India, Raman Effect 1928)",
+        "National Holiday": False
+    },
+    (29, 2): {
+        "Festival": "None",
+        "Event": "Leap Year Day (every 4 years)",
+        "National Holiday": False
+    }
+}
+march_days = {
+    (1, 3): {
+        "Festival": "None",
+        "Event": "Zero Discrimination Day",
+        "National Holiday": False
+    },
+    (2, 3): {
+        "Festival": "None",
+        "Event": "Read Across America Day (US)",
+        "National Holiday": False
+    },
+    (3, 3): {
+        "Festival": "None",
+        "Event": "World Wildlife Day",
+        "National Holiday": False
+    },
+    (4, 3): {
+        "Festival": "None",
+        "Event": "National Safety Day (India)",
+        "National Holiday": False
+    },
+    (5, 3): {
+        "Festival": "None",
+        "Event": "International Day for Disarmament and Non-Proliferation Awareness",
+        "National Holiday": False
+    },
+    (6, 3): {
+        "Festival": "None",
+        "Event": "European Day of the Righteous",
+        "National Holiday": False
+    },
+    (7, 3): {
+        "Festival": "None",
+        "Event": "Janaki Jayanti (varies)",
+        "National Holiday": False
+    },
+    (8, 3): {
+        "Festival": "None",
+        "Event": "International Women’s Day",
+        "National Holiday": False
+    },
+    (9, 3): {
+        "Festival": "None",
+        "Event": "Barbie Day (US)",
+        "National Holiday": False
+    },
+    (10, 3): {
+        "Festival": "None",
+        "Event": "CISF Raising Day (India)",
+        "National Holiday": False
+    },
+    (11, 3): {
+        "Festival": "None",
+        "Event": "World Plumbing Day",
+        "National Holiday": False
+    },
+    (12, 3): {
+        "Festival": "None",
+        "Event": "Mauritius Independence Day",
+        "National Holiday": False
+    },
+    (13, 3): {
+        "Festival": "None",
+        "Event": "No Smoking Day (Second Wednesday)",
+        "National Holiday": False
+    },
+    (14, 3): {
+        "Festival": "None",
+        "Event": "Pi Day / International Day of Mathematics",
+        "National Holiday": False
+    },
+    (15, 3): {
+        "Festival": "None",
+        "Event": "World Consumer Rights Day",
+        "National Holiday": False
+    },
+    (16, 3): {
+        "Festival": "None",
+        "Event": "National Vaccination Day (India)",
+        "National Holiday": False
+    },
+    (17, 3): {
+        "Festival": "None",
+        "Event": "St. Patrick's Day",
+        "National Holiday": False
+    },
+    (18, 3): {
+        "Festival": "None",
+        "Event": "Ordnance Factories Day (India)",
+        "National Holiday": False
+    },
+    (19, 3): {
+        "Festival": "None",
+        "Event": "World Sleep Day (varies — typically Friday of 2nd full week)",
+        "National Holiday": False
+    },
+    (20, 3): {
+        "Festival": "None",
+        "Event": "International Day of Happiness",
+        "National Holiday": False
+    },
+    (21, 3): {
+        "Festival": "Holi (Varies)",
+        "Event": "World Forestry Day",
+        "National Holiday": True
+    },
+    (22, 3): {
+        "Festival": "None",
+        "Event": "World Water Day",
+        "National Holiday": False
+    },
+    (23, 3): {
+        "Festival": "None",
+        "Event": "Shaheed Diwas (India — Bhagat Singh, Sukhdev, Rajguru)",
+        "National Holiday": False
+    },
+    (24, 3): {
+        "Festival": "None",
+        "Event": "World Tuberculosis (TB) Day",
+        "National Holiday": False
+    },
+    (25, 3): {
+        "Festival": "Good Friday (varies)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (26, 3): {
+        "Festival": "None",
+        "Event": "Bangladesh Independence Day",
+        "National Holiday": False
+    },
+    (27, 3): {
+        "Festival": "None",
+        "Event": "World Theatre Day",
+        "National Holiday": False
+    },
+    (28, 3): {
+        "Festival": "None",
+        "Event": "Earth Hour (last Saturday)",
+        "National Holiday": False
+    },
+    (29, 3): {
+        "Festival": "None",
+        "Event": "National Vietnam War Veterans Day (US)",
+        "National Holiday": False
+    },
+    (30, 3): {
+        "Festival": "None",
+        "Event": "Doctors’ Day (US)",
+        "National Holiday": False
+    },
+    (31, 3): {
+        "Festival": "None",
+        "Event": "International Transgender Day of Visibility",
+        "National Holiday": False
+    }
+}
+april_days = {
+    (1, 4): {
+        "Festival": "None",
+        "Event": "April Fools' Day",
+        "National Holiday": False
+    },
+    (2, 4): {
+        "Festival": "Ram Navami (Varies)",
+        "Event": "World Autism Awareness Day",
+        "National Holiday": False
+    },
+    (3, 4): {
+        "Festival": "None",
+        "Event": "Find a Rainbow Day",
+        "National Holiday": False
+    },
+    (4, 4): {
+        "Festival": "None",
+        "Event": "International Day for Mine Awareness",
+        "National Holiday": False
+    },
+    (5, 4): {
+        "Festival": "None",
+        "Event": "National Maritime Day (India)",
+        "National Holiday": False
+    },
+    (6, 4): {
+        "Festival": "None",
+        "Event": "International Day of Sport for Development and Peace",
+        "National Holiday": False
+    },
+    (7, 4): {
+        "Festival": "None",
+        "Event": "World Health Day",
+        "National Holiday": False
+    },
+    (8, 4): {
+        "Festival": "None",
+        "Event": "International Romani Day",
+        "National Holiday": False
+    },
+    (9, 4): {
+        "Festival": "Ugadi / Gudi Padwa (Varies)",
+        "Event": "Jallianwala Bagh Massacre Day (India)",
+        "National Holiday": True
+    },
+    (10, 4): {
+        "Festival": "None",
+        "Event": "Siblings Day",
+        "National Holiday": False
+    },
+    (11, 4): {
+        "Festival": "None",
+        "Event": "National Safe Motherhood Day (India)",
+        "National Holiday": False
+    },
+    (12, 4): {
+        "Festival": "None",
+        "Event": "International Day of Human Space Flight",
+        "National Holiday": False
+    },
+    (13, 4): {
+        "Festival": "None",
+        "Event": "Jallianwala Bagh Massacre Day Observance",
+        "National Holiday": False
+    },
+    (14, 4): {
+        "Festival": "Ambedkar Jayanti",
+        "Event": "Baisakhi / Vishu / Tamil Puthandu (Varies)",
+        "National Holiday": True
+    },
+    (15, 4): {
+        "Festival": "Pohela Boishakh (Bengali New Year)",
+        "Event": "World Art Day",
+        "National Holiday": True
+    },
+    (16, 4): {
+        "Festival": "Hanuman Jayanti (Varies)",
+        "Event": "Save the Elephant Day",
+        "National Holiday": True
+    },
+    (17, 4): {
+        "Festival": "None",
+        "Event": "World Haemophilia Day",
+        "National Holiday": False
+    },
+    (18, 4): {
+        "Festival": "None",
+        "Event": "World Heritage Day",
+        "National Holiday": False
+    },
+    (19, 4): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 4): {
+        "Festival": "None",
+        "Event": "UN Chinese Language Day",
+        "National Holiday": False
+    },
+    (21, 4): {
+        "Festival": "None",
+        "Event": "National Civil Services Day (India)",
+        "National Holiday": False
+    },
+    (22, 4): {
+        "Festival": "None",
+        "Event": "Earth Day",
+        "National Holiday": False
+    },
+    (23, 4): {
+        "Festival": "None",
+        "Event": "World Book and Copyright Day",
+        "National Holiday": False
+    },
+    (24, 4): {
+        "Festival": "None",
+        "Event": "National Panchayati Raj Day (India)",
+        "National Holiday": False
+    },
+    (25, 4): {
+        "Festival": "None",
+        "Event": "World Malaria Day",
+        "National Holiday": False
+    },
+    (26, 4): {
+        "Festival": "None",
+        "Event": "World Intellectual Property Day",
+        "National Holiday": False
+    },
+    (27, 4): {
+        "Festival": "None",
+        "Event": "Freedom Day (South Africa)",
+        "National Holiday": False
+    },
+    (28, 4): {
+        "Festival": "None",
+        "Event": "World Day for Safety and Health at Work",
+        "National Holiday": False
+    },
+    (29, 4): {
+        "Festival": "None",
+        "Event": "International Dance Day",
+        "National Holiday": False
+    },
+    (30, 4): {
+        "Festival": "None",
+        "Event": "Ayushman Bharat Diwas (India)",
+        "National Holiday": False
+    }
+}
+may_days = {
+    (1, 5): {
+        "Festival": "May Day (International Workers' Day)",
+        "Event": "Maharashtra Day, Gujarat Day",
+        "National Holiday": True
+    },
+    (2, 5): {
+        "Festival": "None",
+        "Event": "World Tuna Day",
+        "National Holiday": False
+    },
+    (3, 5): {
+        "Festival": "None",
+        "Event": "World Press Freedom Day",
+        "National Holiday": False
+    },
+    (4, 5): {
+        "Festival": "None",
+        "Event": "International Firefighters’ Day",
+        "National Holiday": False
+    },
+    (5, 5): {
+        "Festival": "None",
+        "Event": "World Asthma Day (1st Tuesday of May)",
+        "National Holiday": False
+    },
+    (6, 5): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 5): {
+        "Festival": "None",
+        "Event": "World Athletics Day",
+        "National Holiday": False
+    },
+    (8, 5): {
+        "Festival": "None",
+        "Event": "World Red Cross Day",
+        "National Holiday": False
+    },
+    (9, 5): {
+        "Festival": "None",
+        "Event": "Rabindranath Tagore Jayanti (Varies)",
+        "National Holiday": True
+    },
+    (10, 5): {
+        "Festival": "None",
+        "Event": "Mother's Day (2nd Sunday of May)",
+        "National Holiday": False
+    },
+    (11, 5): {
+        "Festival": "None",
+        "Event": "National Technology Day (India)",
+        "National Holiday": False
+    },
+    (12, 5): {
+        "Festival": "None",
+        "Event": "International Nurses Day",
+        "National Holiday": False
+    },
+    (13, 5): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 5): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (15, 5): {
+        "Festival": "None",
+        "Event": "International Day of Families",
+        "National Holiday": False
+    },
+    (16, 5): {
+        "Festival": "Buddha Purnima (Varies)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (17, 5): {
+        "Festival": "None",
+        "Event": "World Telecommunication Day",
+        "National Holiday": False
+    },
+    (18, 5): {
+        "Festival": "None",
+        "Event": "International Museum Day",
+        "National Holiday": False
+    },
+    (19, 5): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 5): {
+        "Festival": "None",
+        "Event": "World Bee Day",
+        "National Holiday": False
+    },
+    (21, 5): {
+        "Festival": "None",
+        "Event": "Anti-Terrorism Day (India)",
+        "National Holiday": False
+    },
+    (22, 5): {
+        "Festival": "None",
+        "Event": "International Day for Biological Diversity",
+        "National Holiday": False
+    },
+    (23, 5): {
+        "Festival": "None",
+        "Event": "World Turtle Day",
+        "National Holiday": False
+    },
+    (24, 5): {
+        "Festival": "None",
+        "Event": "Commonwealth Day (India, Varies)",
+        "National Holiday": False
+    },
+    (25, 5): {
+        "Festival": "None",
+        "Event": "African Liberation Day",
+        "National Holiday": False
+    },
+    (26, 5): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (27, 5): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (28, 5): {
+        "Festival": "None",
+        "Event": "Menstrual Hygiene Day",
+        "National Holiday": False
+    },
+    (29, 5): {
+        "Festival": "None",
+        "Event": "International Day of UN Peacekeepers",
+        "National Holiday": False
+    },
+    (30, 5): {
+        "Festival": "None",
+        "Event": "Goa Statehood Day",
+        "National Holiday": True
+    },
+    (31, 5): {
+        "Festival": "None",
+        "Event": "World No Tobacco Day",
+        "National Holiday": False
+    }
+}
+june_days = {
+    (1, 6): {
+        "Festival": "None",
+        "Event": "Global Parents’ Day",
+        "National Holiday": False
+    },
+    (2, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (3, 6): {
+        "Festival": "None",
+        "Event": "World Bicycle Day",
+        "National Holiday": False
+    },
+    (4, 6): {
+        "Festival": "None",
+        "Event": "International Day of Innocent Children Victims of Aggression",
+        "National Holiday": False
+    },
+    (5, 6): {
+        "Festival": "None",
+        "Event": "World Environment Day",
+        "National Holiday": False
+    },
+    (6, 6): {
+        "Festival": "None",
+        "Event": "D-Day",
+        "National Holiday": False
+    },
+    (7, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 6): {
+        "Festival": "None",
+        "Event": "World Oceans Day",
+        "National Holiday": False
+    },
+    (9, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 6): {
+        "Festival": "None",
+        "Event": "World Gin Day (2nd Saturday of June)",
+        "National Holiday": False
+    },
+    (12, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 6): {
+        "Festival": "None",
+        "Event": "International Albinism Awareness Day",
+        "National Holiday": False
+    },
+    (14, 6): {
+        "Festival": "None",
+        "Event": "Flag Day (USA)",
+        "National Holiday": False
+    },
+    (15, 6): {
+        "Festival": "None",
+        "Event": "Father's Day (3rd Sunday of June)",
+        "National Holiday": False
+    },
+    (16, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 6): {
+        "Festival": "None",
+        "Event": "World Day to Combat Desertification and Drought",
+        "National Holiday": False
+    },
+    (18, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (19, 6): {
+        "Festival": "None",
+        "Event": "Juneteenth (USA)",
+        "National Holiday": False
+    },
+    (20, 6): {
+        "Festival": "None",
+        "Event": "World Refugee Day",
+        "National Holiday": False
+    },
+    (21, 6): {
+        "Festival": "International Yoga Day",
+        "Event": "Summer Solstice",
+        "National Holiday": False
+    },
+    (22, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (26, 6): {
+        "Festival": "None",
+        "Event": "International Day Against Drug Abuse and Illicit Trafficking",
+        "National Holiday": False
+    },
+    (27, 6): {
+        "Festival": "None",
+        "Event": "Micro-, Small and Medium-sized Enterprises Day",
+        "National Holiday": False
+    },
+    (28, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 6): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 6): {
+        "Festival": "None",
+        "Event": "Social Media Day",
+        "National Holiday": False
+    }
+}
+july_days = {
+    (1, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (2, 7): {
+        "Festival": "None",
+        "Event": "World UFO Day",
+        "National Holiday": False
+    },
+    (3, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (4, 7): {
+        "Festival": "None",
+        "Event": "Independence Day (USA)",
+        "National Holiday": True
+    },
+    (5, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (6, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (9, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 7): {
+        "Festival": "None",
+        "Event": "World Population Day",
+        "National Holiday": False
+    },
+    (12, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 7): {
+        "Festival": "None",
+        "Event": "Bastille Day (France)",
+        "National Holiday": True
+    },
+    (15, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (16, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (18, 7): {
+        "Festival": "None",
+        "Event": "Nelson Mandela International Day",
+        "National Holiday": False
+    },
+    (19, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 7): {
+        "Festival": "None",
+        "Event": "Moon Day (50th Anniversary of Apollo 11 landing)",
+        "National Holiday": False
+    },
+    (21, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (22, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (26, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (27, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (28, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (31, 7): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    }
+}
+august_days = {
+    (1, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (2, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (3, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (4, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (5, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (6, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (9, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (12, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (15, 8): {
+        "Festival": "Independence Day (India)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (16, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (18, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (19, 8): {
+        "Festival": "None",
+        "Event": "World Humanitarian Day",
+        "National Holiday": False
+    },
+    (20, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (21, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (22, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (26, 8): {
+        "Festival": "None",
+        "Event": "Women's Equality Day (USA)",
+        "National Holiday": False
+    },
+    (27, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (28, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (31, 8): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    }
+}
+september_days = {
+    (1, 9): {
+        "Festival": "None",
+        "Event": "Labor Day (USA)",
+        "National Holiday": True
+    },
+    (2, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (3, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (4, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (5, 9): {
+        "Festival": "Teacher's Day (India)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (6, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (9, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (12, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (15, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (16, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (18, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (19, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (21, 9): {
+        "Festival": "None",
+        "Event": "International Day of Peace",
+        "National Holiday": False
+    },
+    (22, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (26, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (27, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (28, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 9): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    }
+}
+october_days = {
+    (1, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (2, 10): {
+        "Festival": "Gandhi Jayanti (India)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (3, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (4, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (5, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (6, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (9, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (12, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (15, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (16, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (18, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (19, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (21, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (22, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (26, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (27, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (28, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 10): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (31, 10): {
+        "Festival": "Halloween",
+        "Event": "None",
+        "National Holiday": False
+    }
+}
+november_days = {
+    (1, 11): {
+        "Festival": "All Saints' Day",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (2, 11): {
+        "Festival": "All Souls' Day",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (3, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (4, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (5, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (6, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (9, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 11): {
+        "Festival": "Veterans Day (USA)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (12, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 11): {
+        "Festival": "Children's Day (India)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (15, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (16, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (18, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (19, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (21, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (22, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (26, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (27, 11): {
+        "Festival": "Thanksgiving (USA)",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (28, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 11): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    }
+}
+december_days = {
+    (1, 12): {
+        "Festival": "World AIDS Day",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (2, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (3, 12): {
+        "Festival": "International Day of Persons with Disabilities",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (4, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (5, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (6, 12): {
+        "Festival": "St. Nicholas Day",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (7, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (8, 12): {
+        "Festival": "Immaculate Conception",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (9, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (10, 12): {
+        "Festival": "Human Rights Day",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (11, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (12, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (13, 12): {
+        "Festival": "St. Lucia's Day",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (14, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (15, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (16, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (17, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (18, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (19, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (20, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (21, 12): {
+        "Festival": "Winter Solstice",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (22, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (23, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (24, 12): {
+        "Festival": "Christmas Eve",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (25, 12): {
+        "Festival": "Christmas Day",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (26, 12): {
+        "Festival": "Boxing Day",
+        "Event": "None",
+        "National Holiday": True
+    },
+    (27, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (28, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (29, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (30, 12): {
+        "Festival": "None",
+        "Event": "None",
+        "National Holiday": False
+    },
+    (31, 12): {
+        "Festival": "New Year's Eve",
+        "Event": "None",
+        "National Holiday": False
+    }
+}
+
+all_festivals = {
+    1: january_days,
+    2: february_days,
+    3: march_days,
+    4: april_days,
+    5: may_days,
+    6: june_days,
+    7: july_days,
+    8: august_days,
+    9: september_days,
+    10: october_days,
+    11: november_days,
+    12: december_days,
+}
+# doubly linked list node
+class Node:
+    def __init__(self, date, info):
+        self.date = date  
+        self.info = info  
+        self.next = None
+        self.prev = None
+
+#doubly linked list
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    #to append a new holiday
+    def append(self, date, info):
+        new_node = Node(date, info)
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+
+    def find_next(self, date, month):
+        current = self.head
+        while current:
+            current_day, current_month = current.date
+            if current_month == month and current.date > date:
+                return current
+            current = current.next
+        return None
+
+    def find_prev(self, date, month):
+        current = self.tail
+        while current:
+            current_day, current_month = current.date
+            if current_month == month and current.date < date:
+                return current
+            current = current.prev
+        return None
+
+#check if given date is a national holiday
+    def is_national_holiday(self, date):
+        current = self.head
+        while current:
+            if current.date == date:
+                return current.info["National Holiday"]
+            current = current.next
+        return False  # If date not found
+
+#initialise the doubly linked list
+holiday_list = DoublyLinkedList()
+
+#to append the list with national holidays
+for month, days in all_festivals.items():
+    for date, info in days.items():
+        if info["National Holiday"]:
+            holiday_list.append(date, info)
+
+#to check if the selected date is a national holiday
+def check_date_from_calendar():
+    date = cal.selection_get()
+    day, month = date.day, date.month
+    info = all_festivals.get(month, {}).get((day, month))
+    if info:
+        if info["National Holiday"]:
+            result_text.set(
+                f"{day:02d}/{month:02d}\n\nNational Holiday!\n\n"
+                f"Festival: {info['Festival']}\n"
+                f"Event: {info['Event']}"
+            )
+        else:
+            result_text.set(
+                f"{day:02d}/{month:02d}\n\nNot a National Holiday\n\n"
+                f"Festival: {info['Festival']}\n"
+                f"Event: {info['Event']}"
+            )
+
+        #show next and previous holidays in the same month
+        next_holiday = holiday_list.find_next((day, month), month)
+        prev_holiday = holiday_list.find_prev((day, month), month)
+
+        if next_holiday:
+            next_day, next_month = next_holiday.date
+            next_holiday_info = next_holiday.info
+            next_info = f"Next National Holiday: {next_day:02d}/{next_month:02d}\n" \
+                        f"Festival: {next_holiday_info['Festival']}\n" \
+                        f"Event: {next_holiday_info['Event']}\n"
+        else:
+            next_info = "No more national holidays this month.\n"
+
+        if prev_holiday:
+            prev_day, prev_month = prev_holiday.date
+            prev_holiday_info = prev_holiday.info
+            prev_info = f"Previous National Holiday: {prev_day:02d}/{prev_month:02d}\n" \
+                        f"Festival: {prev_holiday_info['Festival']}\n" \
+                        f"Event: {prev_holiday_info['Event']}\n"
+        else:
+            prev_info = "No previous national holidays this month."
+        result_text.set(result_text.get() + "\n\n" + next_info + "\n" + prev_info)
+
+#to check date using manual input
+def check_date_from_input():
+    try:
+        day = int(day_entry.get())
+        month = int(month_entry.get())
+        if (day, month) in all_festivals.get(month, {}):
+            info = all_festivals[month][(day, month)]
+            if info["National Holiday"]:
+                result_text.set(f"{day}/{month} National Holiday\n"
+                                f"Festival: {info['Festival']}\n"
+                                f"Event: {info['Event']}\n"
+                                f"National Holiday: Yes")
+            else:
+                result_text.set(f"{day}/{month} Not a National Holiday\n"
+                                f"Festival: {info['Festival']}\n"
+                                f"Event: {info['Event']}\n"
+                                f"National Holiday: No")
+        else:
+            result_text.set("No data available for this date.")
+    except ValueError:
+        result_text.set("Please enter valid numbers for day and month.")
+
+# Tkinter setup
+root = tk.Tk()
+root.title("Festival Calendar with National Holidays")
+root.geometry("400x600")
+root.config(bg="#f0f0f0")
+title = tk.Label(root, text="Festival Calendar", font=("Garamond", 18, "bold"), bg="#f0f0f0", fg="#333")
+title.pack(pady=15)
+
+#calendar
+cal = Calendar(root, selectmode='day', year=2025, month=1, day=1, background="lightblue", foreground="black", headersbackground="#ddeeff")
+cal.pack(pady=10)
+check_btn_calendar = tk.Button(root, text="Show Special Day (Calendar)", command=check_date_from_calendar, font=("Arial", 12), bg="#3399ff", fg="white", padx=10, pady=5)
+check_btn_calendar.pack(pady=10)
+
+#result display
+result_text = tk.StringVar()
+result_label = tk.Label(root, textvariable=result_text, wraplength=350, justify="left", font=("Arial", 12), bg="#ffffff", fg="#333", relief="solid", bd=1, padx=10, pady=10)
+result_label.pack(pady=20, fill="both", expand=True)
+root.mainloop()
