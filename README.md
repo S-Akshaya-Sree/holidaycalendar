@@ -13,3 +13,6 @@ This project uses the Python programming language. Following are the components 
 4. And finally, tkinter GUI has been used for a pleasant user interaction.
 
 On execution, a yearly calendar appears, and on clicking on a specific date, one can check whether that particular day is a national holiday or not, and the immediate previous and next holidays in that month.
+
+Preview:
+<img width="982" height="880" alt="image" src="https://github.com/user-attachments/assets/b4d0f285-5c34-4b79-ae64-963c1b050106" />
