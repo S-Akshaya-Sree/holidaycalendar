@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Calendar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Festival Calendar</h2>
+    
+    <div class="input-group">
+        <label for="calendarInput">Select a Date:</label>
+        <input type="date" id="calendarInput" value="2026-01-01">
+        <button onclick="checkDate()">Show Special Day</button>
+    </div>
+
+    <div id="resultDisplay" class="result-box">
+        Select a date and click the button to see holiday info.
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
